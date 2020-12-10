@@ -320,7 +320,8 @@
 
 \@ifclasswith{oupmemoir}{ebook}{
   \usepackage[a-1b]{pdfx}
-  \usepackage[numbered]{bookmark}}{
+  \usepackage[numbered]{bookmark}}{}
+\@ifclasswith{oupmemoir}{print}{
   \usepackage[x-5]{pdfx}}
 
 \catcode30=12 % fixes a bug in biblatex
@@ -329,9 +330,8 @@
 % Set up links: colored if ebook, o/w black
 
 \definecolor{OxfordBlue}{RGB}{0, 33, 71}
-\@ifclasswith{oupmemoir}{print}{
-  \hypersetup{hidelinks}}{
-  \hypersetup{colorlinks=true,allcolors=OxfordBlue}}
+\@ifclasswith{oupmemoir}{ebook}{
+  \hypersetup{colorlinks=true,allcolors=OxfordBlue}}{}
 \hypersetup{breaklinks}
 
 % Indexing -- turn it off in the preface (in the frontmatter)
