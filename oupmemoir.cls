@@ -16,7 +16,7 @@
 
 \DeclareOption{print}{%
   % Show trim marks
-  \PassOptionsToClass{showtrims,letterpaper}{memoir}
+  \PassOptionsToClass{twoside,showtrims,letterpaper}{memoir}
   \AtEndOfClass{\quarkmarks}}
 
 % class option ebook -- typeset for screen reading
@@ -31,7 +31,7 @@
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{memoir}}
 
 % default options for memoir
-\PassOptionsToClass{openany,twoside}{memoir}
+\PassOptionsToClass{openany}{memoir}
 
 \ProcessOptions
 
@@ -196,8 +196,9 @@
 % half title
 
 \pagestyle{empty}
-\
+
 \vspace*{2.5cm}
+
 \begin{raggedright}
 \LARGE\@title
 \end{raggedright}
@@ -315,7 +316,12 @@
 \usepackage[utf8]{inputenc}
 \usepackage{textcomp}
 
-\usepackage[a-1b]{pdfx}
+% Use PDF/A standard for ebook, PDF/X for print.
+
+\@ifclasswith{oupmemoir}{ebook}{
+  \usepackage[a-1b]{pdfx}}{
+  \usepackage[x-5]{pdfx}}
+
 \catcode30=12 % fixes a bug in biblatex
 
 \usepackage[numbered]{bookmark}

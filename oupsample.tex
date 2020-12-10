@@ -1,4 +1,7 @@
-\documentclass[ebook]{oupmemoir}
+\documentclass[print]{oupmemoir}
+
+% for an ebook version with links etc use instead:
+% \documentclass[ebook]{oupmemoir}
 
 % You probably have to have an index
 \usepackage{makeidx}
@@ -33,7 +36,8 @@
 \author{Immanuel Kant\and Gottfried Wilhelm Leibniz}
 
 \pubyear{2020}
-
+\impression{2}
+\isbn{123--4--567890--0}
 
 \bibliography{oupsample}
 
@@ -55,13 +59,14 @@
 
 \chapter{Introduction}
 
-First, we cite us some \textcite{Kant1746} and \textcite{Leibniz1890}.
+First, we cite us some \textcite{Kant1746} and \textcite{Leibniz1890};
+but see also \cref{app}.
 
 \kant[6-20]
 
 \appendix
 
-\chapter{Appendix}
+\chapter{Appendix}\label{app}
 
 \kant[11-13]
 
