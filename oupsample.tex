@@ -1,0 +1,81 @@
+\documentclass[ebook]{oupmemoir}
+
+% You probably have to have an index
+\usepackage{makeidx}
+\makeindex
+
+% nowidow is useful to get rid of widows and orphans
+\usepackage[all]{nowidow}
+
+% idxlayout fixes the last page of the index for you
+\usepackage{idxlayout}
+
+% I suggest cleverref for automatically providing the "kind" of
+% reference you're \ref'ing (actually, \cref'ing).
+% OUP wants these spelled out and capitalized
+
+\usepackage[capitalize,nameinlink]{cleveref}
+
+% except for footnote refs, those are just n. 1.
+
+\crefname{footnote}{n.}{n.}
+\Crefname{footnote}{N.}{N.}
+
+% blindtext -- in Kant's style, for fun
+
+\usepackage[index]{kantlipsum}
+
+\title{Sample Book}
+\subtitle{A Test of OUP Memoir}
+
+% Just to see what happens with two authors
+% no space before \and!
+\author{Immanuel Kant\and Gottfried Wilhelm Leibniz}
+
+\pubyear{2020}
+
+
+\bibliography{oupsample}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents*
+
+\indexoff % OUP doesn't want the preface indexed
+
+\chapter{Preface}
+
+\kant[1-5] % this just makes dummy text
+
+\indexon
+
+\mainmatter
+
+\chapter{Introduction}
+
+First, we cite us some \textcite{Kant1746} and \textcite{Leibniz1890}.
+
+\kant[6-20]
+
+\appendix
+
+\chapter{Appendix}
+
+\kant[11-13]
+
+\backmatter
+
+% don't index the bibliography (\cite automatically adds 
+% index entries)
+
+\indexoff 
+
+\printbibliography
+
+\indexon
+
+\printindex
+
+\end{document}
