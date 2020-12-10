@@ -222,7 +222,7 @@
   \LARGE\@author\par
 \end{raggedright}
 
-\vfill
+\vfill\noindent
 \includegraphics[height=1cm]{\oup@logo}
 \cleartoverso
 
@@ -319,12 +319,12 @@
 % Use PDF/A standard for ebook, PDF/X for print.
 
 \@ifclasswith{oupmemoir}{ebook}{
-  \usepackage[a-1b]{pdfx}}{
+  \usepackage[a-1b]{pdfx}
+  \usepackage[numbered]{bookmark}}{
   \usepackage[x-5]{pdfx}}
 
 \catcode30=12 % fixes a bug in biblatex
 
-\usepackage[numbered]{bookmark}
 
 % Set up links: colored if ebook, o/w black
 
@@ -334,57 +334,11 @@
   \hypersetup{colorlinks=true,allcolors=OxfordBlue}}
 \hypersetup{breaklinks}
 
-\renewcommand\UrlFont{\ttfamily\small}
-\usepackage{csquotes}
-
 % Indexing -- turn it off in the preface (in the frontmatter)
 
 \let\@oupindex\index
 \newcommand*{\indexoff}{\let\@oupindex\index\let\index\@gobble}
 \newcommand*{\indexon}{\let\index\@oupindex}
-
-% Set up BibLaTeX for bibliography management
-
-% Bibliography for philosophy
-\usepackage[indexing=cite,maxnames=3,minnames=2,publocformat=loccolonpub,style=philosophy-classic]{biblatex}
-\uspunctuation
-
-% journal issues in parens after volume
-\renewcommand*{\volnumpunct}{}
-\DeclareFieldFormat[article]{number}{(#1)}
-
-% Make article titles sentence case but keep journal titles
-
-\DeclareFieldFormat[article,incollection,inproceedings]{titlecase}{\MakeSentenceCase*{#1}}
-
-\renewbibmacro*{journal}{%
-  \iffieldundef{journaltitle}
-    {}
-    {\printtext[journaltitle]{%
-       \printfield{journaltitle}%
-       \setunit{\subtitlepunct}%
-       \printfield{journalsubtitle}}}}
-
-\DeclareFieldFormat{journaltitle}{\textit{#1}}
-\DeclareFieldFormat{booktitle}{\textit{#1}}
-
-% Soandso, ed.,
-\renewcommand*{\editorstrgdelim}{\addcomma\space}
-\DeclareFieldFormat{editortype}{#1}% no parentheses
-
-\DefineBibliographyExtras{english}{%
-  \protected\def\bibrangedash{%
-    \textendash\penalty\hyphenpenalty}%
-  \protected\def\bibdaterangesep{\bibrangedash}}%
-
-\NewBibliographyString{editedas,publishedas}
-
-\DefineBibliographyStrings{english}{%
-  editedas = {ed. as},
-  publishedas = {publ. as},
-  reprintas = {publ. as},
-  translationas = {trans. as}
-}
 
 \DeclareGraphicsExtensions{.pdf, .jpg, .tif}
 
@@ -393,28 +347,3 @@
 \usepackage[osf]{newpxtext}
 \usepackage[slantedGreek]{newpxmath}
 \linespread{1.05}
-
-% Add cited author names to index 
-\DeclareCiteCommand{\citetitle}
-  {\boolfalse{citetracker}%
-   \boolfalse{pagetracker}%
-   \usebibmacro{prenote}}
-  {\ifciteindex
-     {\indexnames{labelname}}
-     {}%
-   \printfield[citetitle]{labeltitle}}
-  {\multicitedelim}
-  {\usebibmacro{postnote}}
-
-\DeclareCiteCommand*{\citetitle}
-  {\boolfalse{citetracker}%
-   \boolfalse{pagetracker}%
-   \usebibmacro{prenote}}
-  {\ifciteindex
-     {\indexnames{labelname}}
-     {}%
-   \printfield[citetitle]{title}}
-  {\multicitedelim}
-  {\usebibmacro{postnote}}
-
-\renewbibmacro*{citeindex}{\indexnames{labelname}{}}

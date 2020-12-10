@@ -1,0 +1,39 @@
+% oupbiblatex citation style
+% ==================
+% A BibLaTeX style for producing an OUP book.
+%
+% Richard Zach
+%
+% Distributed under the terms of the MIT License
+% https://opensource.org/licenses/MIT
+
+\ProvidesFile{oupbiblatex.cbx}
+
+% Bibliography for philosophy
+\RequireCitationStyle{philosophy-classic}
+
+% Add cited author names to index 
+\DeclareCiteCommand{\citetitle}
+  {\boolfalse{citetracker}%
+   \boolfalse{pagetracker}%
+   \usebibmacro{prenote}}
+  {\ifciteindex
+     {\indexnames{labelname}}
+     {}%
+   \printfield[citetitle]{labeltitle}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand*{\citetitle}
+  {\boolfalse{citetracker}%
+   \boolfalse{pagetracker}%
+   \usebibmacro{prenote}}
+  {\ifciteindex
+     {\indexnames{labelname}}
+     {}%
+   \printfield[citetitle]{title}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\renewbibmacro*{citeindex}{\indexnames{labelname}{}}
+\endinput

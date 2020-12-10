@@ -1,0 +1,63 @@
+% oupbiblatex bibliography style
+% ==================
+% A BibLaTeX style for producing an OUP book.
+%
+% Richard Zach
+%
+% Distributed under the terms of the MIT License
+% https://opensource.org/licenses/MIT
+
+\ProvidesFile{oupbiblatex.bbx}
+
+% make urls smaller
+\renewcommand\UrlFont{\ttfamily\small}
+% load csquotes
+\usepackage{csquotes}
+
+% Set up BibLaTeX for bibliography management
+
+% Bibliography for philosophy
+\RequireBibliographyStyle{philosophy-classic}
+
+\ExecuteBibliographyOptions{indexing=cite,maxnames=3,minnames=2,publocformat=loccolonpub}
+\uspunctuation
+
+
+% journal issues in parens after volume
+\renewcommand*{\volnumpunct}{}
+\DeclareFieldFormat[article]{number}{(#1)}
+
+% Make article titles sentence case but keep journal titles
+
+\DeclareFieldFormat[article,incollection,inproceedings]{titlecase}{\MakeSentenceCase*{#1}}
+
+\renewbibmacro*{journal}{%
+  \iffieldundef{journaltitle}
+    {}
+    {\printtext[journaltitle]{%
+       \printfield{journaltitle}%
+       \setunit{\subtitlepunct}%
+       \printfield{journalsubtitle}}}}
+
+\DeclareFieldFormat{journaltitle}{\textit{#1}}
+\DeclareFieldFormat{booktitle}{\textit{#1}}
+
+% Soandso, ed.,
+\renewcommand*{\editorstrgdelim}{\addcomma\space}
+\DeclareFieldFormat{editortype}{#1}% no parentheses
+
+\DefineBibliographyExtras{english}{%
+  \protected\def\bibrangedash{%
+    \textendash\penalty\hyphenpenalty}%
+  \protected\def\bibdaterangesep{\bibrangedash}}%
+
+\NewBibliographyString{editedas,publishedas}
+
+\DefineBibliographyStrings{english}{%
+  editedas = {ed. as},
+  publishedas = {publ. as},
+  reprintas = {publ. as},
+  translationas = {trans. as}
+}
+
+\endinput
